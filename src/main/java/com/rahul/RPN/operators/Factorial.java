@@ -29,8 +29,8 @@ public class Factorial implements Operator {
 		if (stack.size() < 1)
 			return false;
 		double operand1 = stack.pop();
-		if (operand1 < 0) {
-			log.error("The factorial operator can not be applied to negative number: {}",operand1);
+		if (operand1 < 0 || Double.toString(operand1).matches("\\d*\\.[1-9]\\d*")) {
+			log.error("The factorial operator can not be applied to this argument : {}", operand1);
 			return false;
 		}
 		double result = fact(operand1);

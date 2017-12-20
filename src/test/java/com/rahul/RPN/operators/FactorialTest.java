@@ -21,8 +21,17 @@ public class FactorialTest {
 		factorial.operate(stack);
 		res = stack.pop();
 		assertEquals(res, 1.0, 0.0);
+		
+	}
+	
+	@Test
+	public void boundaryTest(){
+		Stack<Double> stack = new Stack<Double>();
 		stack.push(-1.0);
 		assertFalse(factorial.operate(stack));
+		stack.push(1.2);
+		assertFalse(factorial.operate(stack));
+		
 	}
 
 }
