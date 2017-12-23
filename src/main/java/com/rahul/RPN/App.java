@@ -47,27 +47,30 @@ public class App {
 
 	private void generateOutput(String[] args) {
 		File outputFile = null;
-		if(args!=null){
-		if (args.length == 2 && StringUtils.isNotBlank(args[1])) {
-			outputFile = new File(args[0]);
+		if (args != null) {
+			if (args.length == 2 && StringUtils.isNotBlank(args[1])) {
+				outputFile = new File(args[0]);
+			} else {
+				outputFile = new File(args[0] + ".evaluatedPostfix.txt");
+			}
 		} else {
-			outputFile = new File(args[0] + ".evaluatedPostfix.txt");
-		}
-		}else{
 			outputFile = new File("evaluatedPostfix.txt");
 		}
 		Engine engine = new Engine();
 		StringBuffer output = new StringBuffer();
-		output.append("Postfix Expression").append('\t').append("Value").append('\n');
+		addHorizontalLine(output);
+		output.append("Postfix Expression").append('\t').append('\t').append('|').append('\t').append("Value").append('\n');
+		addHorizontalLine(output);
 		for (String postfixExpression : postfixExpressions) {
 			try {
 				double res = engine.evaluteExpression(postfixExpression);
-				output.append(postfixExpression).append('\t').append(res).append('\n');
+				output.append(postfixExpression).append('\t').append('\t').append('\t').append('|').append('\t').append(res).append('\n');
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		addHorizontalLine(output);
 		System.out.println(output.toString());
 		FileOutputStream fos = null;
 		try {
@@ -80,6 +83,12 @@ public class App {
 		}
 		System.out.println("The expressions have been evaluted and the results have been stored in the file : \n"
 				+ outputFile.getName());
+	}
+
+	private void addHorizontalLine(StringBuffer output) {
+		for(int idx = 0; idx<=100;idx++)
+		output.append("_");
+		output.append('\n');
 	}
 
 	private void addAllExpressions(String args) {
