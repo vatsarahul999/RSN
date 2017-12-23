@@ -49,7 +49,7 @@ public class App {
 		File outputFile = null;
 		if (args != null) {
 			if (args.length == 2 && StringUtils.isNotBlank(args[1])) {
-				outputFile = new File(args[0]);
+				outputFile = new File(args[1]);
 			} else {
 				outputFile = new File(args[0] + ".evaluatedPostfix.txt");
 			}
