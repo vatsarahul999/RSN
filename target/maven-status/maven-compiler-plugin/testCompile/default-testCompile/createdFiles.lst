@@ -1,4 +1,7 @@
-com/rahul/RPN/operators/AdditionTest.class
 com/rahul/RPN/operators/PercentageTest.class
+com/rahul/RPN/operators/DivisionTest.class
+com/rahul/RPN/operators/AdditionTest.class
 com/rahul/RPN/AppTest.class
+com/rahul/RPN/operators/SubtractionTest.class
 com/rahul/RPN/operators/FactorialTest.class
+com/rahul/RPN/operators/ExponentialTest.class

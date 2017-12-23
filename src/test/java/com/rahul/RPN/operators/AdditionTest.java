@@ -1,6 +1,7 @@
 package com.rahul.RPN.operators;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.util.Stack;
 
@@ -18,5 +19,16 @@ public class AdditionTest {
 		addition.operate(stack);
 		double res = stack.pop();
 		assertEquals(res, 23.11, 0.0);
+	}
+	
+	@Test
+	public void additionBoundary(){
+		Stack<Double> stack = new Stack<Double>();
+		stack.push(-11.22);
+		stack.push(11.22);
+		addition.operate(stack);
+		double res = stack.pop();
+		assertEquals(0.0, res,0.0);
+		assertFalse(addition.operate(stack));
 	}
 }

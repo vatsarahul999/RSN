@@ -21,8 +21,8 @@ public class Exponential implements Operator {
 		log.info("The operation performed is {}", operatorSymbol);
 		if (stack.size() < 2)
 			return false;
-		double operand1 = stack.pop();
 		double operand2 = stack.pop();
+		double operand1 = stack.pop();
 		double result = Math.pow(operand1, operand2);
 		stack.push(result);
 		log.debug("The result of {} between {} and  is {}", operatorSymbol, operand1, operand2, result);

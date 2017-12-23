@@ -19,10 +19,16 @@ public class Division implements Operator {
 
 	public boolean operate(Stack<Double> stack) {
 		log.info("The operation performed is {}", operatorSymbol);
-		if (stack.size() < 2)
+		if (stack.size() < 2){
+			log.error("The division is binary operation.");
 			return false;
-		double operand1 = stack.pop();
+		}
 		double operand2 = stack.pop();
+		double operand1 = stack.pop();
+		if (operand2 == 0.0) {
+			log.error("The can not use division with 0.");
+			return false;
+		}
 		double result = operand1 / operand2;
 		stack.push(result);
 		log.debug("The result of {} between {} and  is {}", operatorSymbol, operand1, operand2, result);
