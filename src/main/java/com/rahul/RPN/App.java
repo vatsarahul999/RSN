@@ -33,28 +33,37 @@ public class App {
 			String input = scanner.nextLine().trim();
 			app.addExpression(input);
 			scanner.close();
-		}else{
+		} else {
 			app.execute(args);
 		}
-		System.out.println("Done");
+		System.out.println("The process has been completed successfully.");
 	}
 
 	private void execute(String[] args) {
 		addAllExpressions(args[0]);
+		generateOutput(args);
+
+	}
+
+	private void generateOutput(String[] args) {
 		File outputFile = null;
-		if(args.length == 2 && StringUtils.isNotBlank(args[1])){
+		if(args!=null){
+		if (args.length == 2 && StringUtils.isNotBlank(args[1])) {
 			outputFile = new File(args[0]);
+		} else {
+			outputFile = new File(args[0] + ".evaluatedPostfix.txt");
 		}
-		else{
-			outputFile = new File(args[0]+".evaluated.txt");
+		}else{
+			outputFile = new File("evaluatedPostfix.txt");
 		}
 		Engine engine = new Engine();
 		StringBuffer output = new StringBuffer();
-		for(String s : postfixExpressions){
+		output.append("Postfix Expression").append('\t').append("Value").append('\n');
+		for (String postfixExpression : postfixExpressions) {
 			try {
-				double res = engine.evaluteExpression(s);
-				output.append(s).append('\t').append(res).append('\n');
-				
+				double res = engine.evaluteExpression(postfixExpression);
+				output.append(postfixExpression).append('\t').append(res).append('\n');
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -67,24 +76,24 @@ public class App {
 			fos.flush();
 			fos.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+		System.out.println("The expressions have been evaluted and the results have been stored in the file : \n"
+				+ outputFile.getName());
 	}
 
 	private void addAllExpressions(String args) {
 		File inputFile = new File(args);
-		System.out.println("The file is being read");
 		DataReader dataReader = new DataReader();
+		System.out.println("Reading file :" + inputFile.getName());
 		postfixExpressions.addAll(dataReader.getExpression(inputFile));
 		log.debug("Identified all the expression.");
-		
+
 	}
 
 	private void addExpression(String input) {
 		postfixExpressions.add(input);
-		
+		generateOutput(null);
+
 	}
 }
