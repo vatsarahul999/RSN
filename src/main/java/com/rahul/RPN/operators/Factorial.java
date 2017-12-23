@@ -1,8 +1,8 @@
 package com.rahul.RPN.operators;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 import java.util.Stack;
+import java.util.TreeMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +15,12 @@ public class Factorial implements Operator {
 
 	private static final Factorial INSTANCE = new Factorial();
 
-	private List<Double> mem;
+	private Map<Integer, Double> mem;
 
 	private Factorial() {
-		mem = new ArrayList<Double>();
-		mem.add(1.0);
-		mem.add(1.0);
+		mem = new TreeMap<Integer, Double>();
+		mem.put(1, 1.0);
+		mem.put(0, 1.0);
 		log.debug("Intialized the Factorial Operator");
 	}
 
@@ -41,11 +41,15 @@ public class Factorial implements Operator {
 
 	private double fact(double operand1) {
 		int idx = (int) operand1;
-		if (mem.size() >= idx)
+		if (mem.containsKey(idx))
 			return mem.get(idx);
-		int sz = mem.size();
-		for (int i = sz; i <= idx; i++) {
-			mem.add(mem.get(i - 1) * i);
+		double res = 1;
+		for (int i = 1; i <= idx; i++) {
+			{
+				res = res * i;
+				mem.put(i, res);
+				log.error("There is an error in calulating the factorial.");
+			}
 		}
 		return mem.get(idx);
 	}

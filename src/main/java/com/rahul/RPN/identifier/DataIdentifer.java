@@ -3,27 +3,33 @@ package com.rahul.RPN.identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DataIdentiifer {
+public class DataIdentifer {
 
-	private final Logger log = LoggerFactory.getLogger(DataIdentiifer.class);
+	private final Logger log = LoggerFactory.getLogger(DataIdentifer.class);
 
 	public Token getData(String data) throws IllegalArgumentException {
 		DataTypes dataTypes = null;
-		if (data.matches("\\d+"))
+		if (data.matches("\\d+")) {
+			log.debug("The data has been identiifed as an Operand {}", data);
 			dataTypes = DataTypes.OPERAND;
-		else if (data.matches("\\d*.\\d+"))
+		} else if (data.matches("\\d*.\\d+")) {
+			log.debug("The data has been identiifed as an Operand {}", data);
 			dataTypes = DataTypes.OPERAND;
-		else
+		} else {
+			log.debug("The data has been identiifed as an Operator {}", data);
 			dataTypes = DataTypes.OPERATOR;
+		}
 		switch (dataTypes) {
 		case OPERAND:
 			return new Token(dataTypes, Double.parseDouble(data));
 		case OPERATOR:
 			char[] operator = data.toCharArray();
-			if (isOperator(operator[0]))
+			if (isOperator(operator[0])) {
+				log.debug("The opertor is identified as operator {}", operator[0]);
 				return new Token(dataTypes, operator[0]);
-			else {
-				throw new IllegalArgumentException("The data type can not be identifed");
+			} else {
+				log.error("The datatype {} can NOT be identifed", data);
+				throw new IllegalArgumentException("The data type can not be identifed "+data);
 			}
 		default:
 			log.error("The datatype {} can NOT be identifed", data);
@@ -40,6 +46,7 @@ public class DataIdentiifer {
 		case '/':
 		case '^':
 		case '!':
+		case '%':
 			log.info("The operator identified is {}", c);
 			return true;
 		default:

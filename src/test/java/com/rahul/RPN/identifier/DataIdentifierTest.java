@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class DataIdentifierTest {
 
-	private DataIdentiifer dataIdentiifer = new DataIdentiifer();
+	private DataIdentifer dataIdentiifer = new DataIdentifer();
 
 	@Test
 	public void testDataIdentifier() {

@@ -59,6 +59,11 @@ public class Token {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Token [dataType=" + dataType + ", operand=" + operand + ", operator=" + operator + "]";
+	}
 	
 
 }
