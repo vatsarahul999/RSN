@@ -32,7 +32,7 @@ public class DataIdentifer {
 				throw new IllegalArgumentException("The data type can not be identifed "+data);
 			}
 		default:
-			log.error("The datatype {} can NOT be identifed", data);
+			log.error("The data :{} can NOT be identifed", data);
 			throw new IllegalArgumentException("The data type can not be identifed");
 
 		}
